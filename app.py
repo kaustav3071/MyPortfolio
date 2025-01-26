@@ -5,22 +5,35 @@ from datetime import datetime
 from flask_mail import Mail, Message
 import json
 import os
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-# Load configuration from JSON file
+
 with open('config.json', 'r') as f:
     params = json.load(f)["params"]
 
 app = Flask(__name__)
 
-# Set the SQLite database URI (file-based)
+
 app.config["SQLALCHEMY_DATABASE_URI"] = params['database_uri']
 
-# Set secret key for sessions and flash messages
-app.secret_key = os.urandom(24)  # Generate a strong random key
+app.secret_key = os.urandom(24)  
 
 db = SQLAlchemy(app)
 
-# Define the database table model
+# Configure Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'admin' 
+
+# Define the user class for Flask-Login
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User(user_id)
+
 class dastable(db.Model):
     srno = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -30,7 +43,7 @@ class dastable(db.Model):
     message = db.Column(db.String(500), nullable=False)
     date_submit = db.Column(db.DateTime, default=datetime.now)
 
-# Configure mail settings
+
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
@@ -40,7 +53,7 @@ app.config['MAIL_PASSWORD'] = params['gmail_password']
 
 mail = Mail(app)
 
-# Email validation function
+
 def is_valid_email(email): 
     '''Validate email address using regex.'''
     email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' 
@@ -52,7 +65,8 @@ def admin():
         username = request.form.get('username')
         password = request.form.get('password')
         if username == params['admin_username'] and password == params['admin_password']:
-            session['user'] = username
+            user = User(id=username)
+            login_user(user)
             return redirect(url_for('admindashboard'))
         else:
             return render_template('invalid.html')
@@ -119,11 +133,13 @@ def invalid():
     return render_template("invalid.html", params=params)
 
 @app.route("/admindashboard")
+@login_required
 def admindashboard():
     data = dastable.query.all()
     return render_template("admindashboard.html", datas=data, params=params)
 
 @app.route("/delete/<int:srno>", methods=['GET', 'POST'])
+@login_required
 def delete(srno):
     try:
         record = dastable.query.get(srno)
@@ -137,6 +153,12 @@ def delete(srno):
         flash(f"Error occurred while deleting record: {e}", "danger")
     return redirect(url_for('admindashboard'))
 
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('admin'))
 
 if __name__ == "__main__":
     with app.app_context():
