@@ -1,0 +1,103 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Logo Section */
+header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.logo {
+    width: 80px; /* Adjust size as needed */
+    height: auto;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #4A90E2, #50A7C2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+}
+
+/* Main Container */
+.container {
+    text-align: center;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Title and Description */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+}
+
+/* Certificates Grid */
+.certificates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+/* Individual Certificate */
+.certificate {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    width: 150px;
+}
+
+.certificate:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Certificate Links */
+.certificate a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.certificate img {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.certificate p {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 5px;
+    color: white;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/static/css/adminstyle.css">
+<head>
+  <title>Kaustav Login</title>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Kaustav Login</h2>
+    <img src="/static/images/about/WhatsApp Image 2025-01-19 at 13.54.15_ecde8fb1.jpg" alt="Your Photo">
+    <form method="POST" action="/admin">
+      <input type="text" id="username" name="username" placeholder="username" required>
+      <input type="password" id="password" name="password" placeholder="password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <p class="footer-text">&copy; {{params['portfolio_name']}} 2017-2018</p>
+
+</body>
+</html>
