@@ -13,17 +13,26 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: linear-gradient(135deg, #3a8dff, #0066cc);
+      background: linear-gradient(135deg, #6dd5fa, #2980b9); /* Fresh blue gradient */
       color: #ffffff;
     }
 
-    p {
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      margin: 0;
+    .container {
       text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for a 3D effect */
+      backdrop-filter: blur(10px); /* Blur background for a glassmorphism effect */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    p {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      margin: 0;
       font-weight: 700;
     }
 
@@ -32,25 +41,25 @@
     }
 
     button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: rgba(255, 255, 255, 0.2);
+      margin-top: 15px;
+      padding: 10px 25px;
+      background-color: rgba(255, 255, 255, 0.3);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 5px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.3s ease;
       font-weight: 700;
     }
 
     button:hover {
-      background-color: rgba(255, 255, 255, 0.4);
-      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
-  <div>
+  <div class="container">
     <p>Invalid username or password</p>
     <a href="/">
       <button>Home</button>

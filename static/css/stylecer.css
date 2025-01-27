@@ -1,77 +1,65 @@
-/* General styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f7f8fa;
-}
-
-/* Certificates container */
-.certificates {
+    font-family: 'Arial', sans-serif;
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-}
-
-/* Individual certificate card */
-.certificate {
-    background: linear-gradient(145deg, #ff8a9d, #ffccd5);
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    text-align: center;
-    width: 300px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.certificate:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Certificate preview image */
-.certificate img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-/* Certificate title */
-.certificate h2 {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
-}
-
-/* Overlay styles */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: none;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-}
-
-/* Viewer styles */
-.certificate-viewer {
-    background-color: #fff;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #89cff0, #61a0d4); /* Bluish gradient */
+    margin: 0;
+    color: #333;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 20px;
     padding: 20px;
-    border-radius: 12px;
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10
-}
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #0066cc;
+  }
+  
+  .certificates {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .certificate {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 200px; /* Adjust width as needed */
+  }
+  
+  .certificate img {
+    width: 100%; /* Make image responsive */
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .certificate p {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .certificate a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .footer-text {
+    text-align: center;
+    margin-top: 20px;
+    color: #555;
+  }
+  
