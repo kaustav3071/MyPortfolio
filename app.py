@@ -160,6 +160,15 @@ def logout():
     logout_user()
     return redirect(url_for('admin'))
 
+
+@app.route("/udemy")
+def udemy():
+    return render_template("udemy.html", params=params)
+
+@app.route("/nptel")
+def nptel():
+    return render_template("nptel.html", params=params)
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
