@@ -169,6 +169,14 @@ def udemy():
 def nptel():
     return render_template("nptel.html", params=params)
 
+@app.route("/charusat")
+def charusat():
+    return render_template("charusat.html", params=params)
+
+@app.route("/other")
+def other():
+    return render_template("other.html", params=params)
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
