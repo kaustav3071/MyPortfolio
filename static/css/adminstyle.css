@@ -1,80 +1,79 @@
 body {
-    font-family: sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #e6f0ff; /* Light Blue background */
-    color: #333; /* Darker text for better contrast */
-  }
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #8ec5fc, #e0c3fc); /* Light blue to lavender gradient */
+  color: #333; /* Darker text for better contrast */
+  margin: 0;
+}
 
 .container {
-    background-color: #fff; /* White background */
-    padding: 40px;
-    border-radius: 15px; /* More rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased box shadow */
-    width: 350px; /* Slightly wider container */
-    text-align: center; /* Center content within the container */
-    overflow: hidden; /* Hide scrollbars */
-  }
+  background: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+  padding: 40px;
+  border-radius: 25px; /* More rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Increased and softened box shadow */
+  width: 400px; /* Wider container */
+  text-align: center; /* Center content within the container */
+  backdrop-filter: blur(10px); /* Blur background behind the container */
+  height: 400px;
+}
 
 h2 {
-    margin-bottom: 30px;
-    font-size: 1.5rem; /* Larger heading size */
-    color: #333; /* Darker text for better contrast */
-  }
+  margin-bottom: 30px;
+  font-size: 2rem; /* Larger heading size */
+  color: #333; /* Darker text for better contrast */
+}
 
 img {
-    width: 100px; /* Adjust image width as needed */
-    border-radius: 50%;
-    margin-bottom: 20px;
-    border: 4px solid #fff; /* Add a white border to the image */
-    /* Removed pulse animation */
-  }
+  width: 120px; /* Adjust image width as needed */
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 5px solid #fff; /* Add a white border to the image */
+}
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
-    padding: 18px;
-    margin-bottom: 26px;
-    border: none; /* Remove default border */
-    border-radius: 8px;
-    background-color: #f0f5ff; /* Light blue input background */
-    color: #333; /* Darker text for better contrast */
-    font-size: 1.1rem; /* Slightly larger font size */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle input shadow */
-    outline: none; /* Remove browser outline */
-    transition: background-color 0.3s ease;
-  }
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: none; /* Remove default border */
+  border-radius: 20px; /* More rounded input fields */
+  background-color: #f3f4f6; /* Very light grey input background */
+  color: #333; /* Darker text for better contrast */
+  font-size: 1.2rem; /* Larger font size */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle input shadow */
+  outline: none; /* Remove browser outline */
+  transition: background-color 0.3s ease;
+}
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    background-color: #e0efff; /* Slightly lighter blue on focus */
-  }
+  background-color: #e0efff; /* Light blue on focus */
+}
 
 button {
-    background-color: #007bff; /* Blue color */
-    color: #fff;
-    padding: 18px 30px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
-  }
+  background: linear-gradient(to right, #667eea, #764ba2); /* Gradient button background */
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 20px; /* More rounded button */
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+}
 
 button:hover {
-    background-color: #0062cc;
-  }
+  background: linear-gradient(to right, #5a67d8, #6b46c1); /* Darker gradient on hover */
+}
 
 .footer-text {
-    position: absolute;
-    bottom: 20px; /* Adjust position as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    color: #333; /* Darker text for better contrast */
-    font-size: 0.8rem;
-  }
-
-  
+  position: absolute;
+  bottom: 20px; /* Adjust position as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #333; /* Darker text for better contrast */
+  font-size: 0.8rem;
+}

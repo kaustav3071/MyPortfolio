@@ -127,7 +127,7 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="single-about-txt">
-								<div style="display: flex; align-items: center; text-align: center;">
+								<div style="display: flex; align-items: center; text-align: center; text-align: justify;">
 									<h3>{{ params['aboutme']}}
 									</h3>
 								</div>														
@@ -227,8 +227,8 @@
 											<b>Lions International Academy</b>
 										</h4>
 										<h5>Ankleshwar, India</h5>
-										<p class="description">
-											Updated soon 
+										<p class="description" style="text-align: justify;">
+											<b>{{params['lia']}}</b>
 										</p>
 									</div><!--/.timeline-content-->
 								</div><!--/.timeline-->
@@ -247,12 +247,12 @@
 								<div class="timeline">
 									<div class="timeline-content">
 										<h4 class="title">
-												<img src="/static/images/about/school.png" alt="School Icon" width="30" height="30" style="margin-right: 10px;"> 
-												<b>Vision International School of Excellence</b>
+											<img src="/static/images/about/school.png" alt="School Icon" width="30" height="30" style="margin-right: 10px;"> 
+											<b>Vision International School</b>
 										</h4>
 										<h5>Ankleshwar, India</h5>
-										<p class="description">
-											
+										<p class="description" style="text-align: justify;">
+											<b>{{params['vise']}}</b>
 										</p>
 									</div><!--/.timeline-content-->
 								</div><!--/.timeline-->
@@ -276,7 +276,8 @@
 											<b>{{params['collegename2']}}</b>
 										</h4>
 										<h5>Nadaid, India</h5>
-										<p class="description">Upadated soon
+										<p class="description" style="text-align: justify;">
+											<b>{{params['depstar']}}</b>
 										</p>
 									</div><!--/.timeline-content-->
 								</div><!--/.timeline-->
@@ -588,7 +589,7 @@
 									<div class="item">
 										<img src="/static/images/portfolio/Python-for-scraping-images-online.webp" alt="portfolio image"/>
 										<div class="isotope-overlay">
-											<a href="https://github.com/kaustav3071/student-result-scraper" target="_blank">
+											<a href="https://github.com/kaustav3071/student-results-scraper" target="_blank">
 												Charusat Student Result Scraper
 											</a>
 										</div><!-- /.isotope-overlay -->
@@ -731,7 +732,7 @@
 										</div>
 										<div class="single-contact-add-info">
 											<h3>website</h3>
-											<p><strong><a href="{{params['website_link']}}" target="_blank">{{params['portfolio_name']}}</a></strong></p>
+											<p><strong><a href="{{params['website_link']}}" target="_blank">Click Me</a></strong></p>
 										</div>
 									</div>
 								</div>
