@@ -116,7 +116,7 @@ def submit_form():
                 "New message from " + name,
                 sender=params['gmail_id'],
                 recipients=[params['gmail_id']],
-                body=f"""Hello {params['portfolio_name']},\n\nNew message from {name}:\n\n{message}\n\nFrom: {name}\nEmail: {email}\nPhone Number: {phonenum}"""
+                body=f"""Hello {params['portfolio_name']},\n\nNew message from {name}:\n\n{message}\n\nFrom: {name}\nSubject : {subject}\nEmail: {email}\nPhone Number: {phonenum}"""
             )
             mail.send(admin_msg)
             print("EMAIL SENT TO THE ADMIN..")
