@@ -1,6 +1,3 @@
-# Ignore configuration files containing sensitive data
-config.json
-
 # Ignore environment variables file
 .env
 
