@@ -6,17 +6,20 @@ from flask_mail import Mail, Message
 import json
 import os
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from dotenv import load_dotenv
 
 
+load_dotenv()
+
+# Load non-sensitive parameters from config.json
 with open('config.json', 'r') as f:
     params = json.load(f)["params"]
 
 app = Flask(__name__)
 
-
-app.config["SQLALCHEMY_DATABASE_URI"] = params['database_uri']
-
-app.secret_key = os.urandom(24)  
+# Configuration
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
+app.secret_key = os.urandom(24)
 
 db = SQLAlchemy(app)
 
@@ -43,16 +46,15 @@ class dastable(db.Model):
     message = db.Column(db.String(500), nullable=False)
     date_submit = db.Column(db.DateTime, default=datetime.now)
 
-
+# Mail configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USERNAME'] = params['gmail_id']
-app.config['MAIL_PASSWORD'] = params['gmail_password']
+app.config['MAIL_USERNAME'] = os.getenv("GMAIL_ID")
+app.config['MAIL_PASSWORD'] = os.getenv("GMAIL_PASSWORD")
 
 mail = Mail(app)
-
 
 def is_valid_email(email): 
     '''Validate email address using regex.'''
@@ -64,12 +66,12 @@ def admin():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        if username == params['admin_username'] and password == params['admin_password']:
+        if username == os.getenv("ADMIN_USERNAME") and password == os.getenv("ADMIN_PASSWORD"):
             user = User(id=username)
             login_user(user)
             return redirect(url_for('admindashboard'))
         else:
-            return render_template('invalid.html')
+            return render_template('invalid.html', params=params)
         
     return render_template('admin.html', params=params)
 
@@ -104,7 +106,7 @@ def submit_form():
             # Send confirmation email to the user
             usr_msg = Message(
                 "Thank you for reaching out!",
-                sender=params['gmail_id'],
+                sender=os.getenv("GMAIL_ID"),
                 recipients=[email],
                 body=f"""Hello {name},\n\nThank you for reaching out. We have received your message and will get back to you shortly.\n\nYour Message: {message}\n\nBest Regards"""
             )
@@ -114,8 +116,8 @@ def submit_form():
             # Send email notification to the admin
             admin_msg = Message(
                 "New message from " + name,
-                sender=params['gmail_id'],
-                recipients=[params['gmail_id']],
+                sender=os.getenv("GMAIL_ID"),
+                recipients=[os.getenv("GMAIL_ID")],
                 body=f"""Hello {params['portfolio_name']},\n\nNew message from {name}:\n\n{message}\n\nFrom: {name}\nSubject : {subject}\nEmail: {email}\nPhone Number: {phonenum}"""
             )
             mail.send(admin_msg)
@@ -153,13 +155,11 @@ def delete(srno):
         flash(f"Error occurred while deleting record: {e}", "danger")
     return redirect(url_for('admindashboard'))
 
-
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('admin'))
-
 
 @app.route("/udemy")
 def udemy():

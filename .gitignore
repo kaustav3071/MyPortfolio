@@ -1,0 +1,23 @@
+# Ignore configuration files containing sensitive data
+config.json
+
+# Ignore environment variables file
+.env
+
+# Ignore virtual environments
+venv/
+myenv/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore logs and database files
+*.log
+*.sqlite3
+MyPortfolio.db
+
+# Ignore system files (macOS, Windows, Linux)
+.DS_Store
+Thumbs.db
