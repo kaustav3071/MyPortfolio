@@ -177,6 +177,10 @@ def charusat():
 def other():
     return render_template("other.html", params=params)
 
+@app.route("/coursera")
+def coursera():
+    return render_template("coursera.html", params=params)
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
