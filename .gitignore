@@ -18,3 +18,9 @@ MyPortfolio.db
 # Ignore system files (macOS, Windows, Linux)
 .DS_Store
 Thumbs.db
+
+# Ignore IDE files
+.idea/
+.vscode/
+```
+
