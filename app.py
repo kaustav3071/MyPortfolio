@@ -26,7 +26,15 @@ if not app.debug:
 database_uri = os.getenv("DATABASE_URI", "sqlite:///MyPortfolio.db")
 # Ensure the instance directory exists for SQLite
 if database_uri.startswith('sqlite:///'):
-    os.makedirs('instance', exist_ok=True)
+    # For production, use absolute path
+    if 'sqlite:///' in database_uri and not database_uri.startswith('sqlite:////'):
+        # Convert relative path to absolute for production
+        db_path = database_uri.replace('sqlite:///', '')
+        if not os.path.isabs(db_path):
+            # Create instance directory in the app directory
+            instance_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'instance')
+            os.makedirs(instance_dir, exist_ok=True)
+            database_uri = f"sqlite:///{os.path.join(instance_dir, os.path.basename(db_path))}"
     
 app.config["SQLALCHEMY_DATABASE_URI"] = database_uri
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -66,6 +74,10 @@ app.config['MAIL_USERNAME'] = os.getenv("GMAIL_ID")
 app.config['MAIL_PASSWORD'] = os.getenv("GMAIL_PASSWORD")
 
 mail = Mail(app)
+
+# Initialize database tables
+with app.app_context():
+    db.create_all()
 
 def is_valid_email(email): 
     '''Validate email address using regex.'''
@@ -200,6 +212,16 @@ def coursera():
 @app.route("/mongodb")
 def mongodb():
     return render_template("mongodb.html", params=params)
+
+@app.route("/init-db")
+def init_db():
+    """Route to manually initialize database - for troubleshooting"""
+    try:
+        with app.app_context():
+            db.create_all()
+        return "Database initialized successfully!"
+    except Exception as e:
+        return f"Error initializing database: {str(e)}"
 
 @app.errorhandler(500)
 def internal_error(error):
