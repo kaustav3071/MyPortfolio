@@ -5,6 +5,7 @@ from datetime import datetime
 from flask_mail import Mail, Message
 import json
 import os
+import logging
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from dotenv import load_dotenv
 
@@ -17,8 +18,18 @@ with open('config.json', 'r') as f:
 
 app = Flask(__name__)
 
+# Configure logging for production
+if not app.debug:
+    logging.basicConfig(level=logging.INFO)
+
 # Configuration
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
+database_uri = os.getenv("DATABASE_URI", "sqlite:///MyPortfolio.db")
+# Ensure the instance directory exists for SQLite
+if database_uri.startswith('sqlite:///'):
+    os.makedirs('instance', exist_ok=True)
+    
+app.config["SQLALCHEMY_DATABASE_URI"] = database_uri
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = os.urandom(24)
 
 db = SQLAlchemy(app)
@@ -137,8 +148,13 @@ def invalid():
 @app.route("/admindashboard")
 @login_required
 def admindashboard():
-    data = dastable.query.all()
-    return render_template("admindashboard.html", datas=data, params=params)
+    try:
+        data = dastable.query.all()
+        return render_template("admindashboard.html", datas=data, params=params)
+    except Exception as e:
+        app.logger.error(f"Error in admindashboard: {str(e)}")
+        flash("An error occurred while loading the dashboard.", "danger")
+        return redirect(url_for('admin'))
 
 @app.route("/delete/<int:srno>", methods=['GET', 'POST'])
 @login_required
@@ -184,6 +200,15 @@ def coursera():
 @app.route("/mongodb")
 def mongodb():
     return render_template("mongodb.html", params=params)
+
+@app.errorhandler(500)
+def internal_error(error):
+    app.logger.error(f"Internal Server Error: {str(error)}")
+    return render_template("invalid.html", params=params), 500
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template("invalid.html", params=params), 404
 
 if __name__ == "__main__":
     with app.app_context():
