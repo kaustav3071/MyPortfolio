@@ -13,7 +13,10 @@ __pycache__/
 # Ignore logs and database files
 *.log
 *.sqlite3
+*.db
 MyPortfolio.db
+instance/*.db
+instance/MyPortfolio.db
 
 # Ignore system files (macOS, Windows, Linux)
 .DS_Store
