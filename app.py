@@ -18,6 +18,18 @@ with open('config.json', 'r') as f:
 
 app = Flask(__name__)
 
+from flask import Flask, redirect, request
+
+app = Flask(__name__)
+
+@app.before_request
+def redirect_render_domain():
+    if request.host == "kaustav-portfolio.onrender.com":
+        return redirect(
+            "https://www.kaustavdas.me" + request.full_path,
+            code=301
+        )
+
 # Configure logging for production
 if not app.debug:
     logging.basicConfig(level=logging.INFO)
